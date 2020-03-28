@@ -64,6 +64,7 @@ vector<i32> compile_to_instrcs(strings s) {
 			}
 		}
 	}
+	instructions.push_back(0x40000000); //halt
 	return instructions;
 }
 bool _isinteger(string s) {
