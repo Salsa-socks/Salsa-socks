@@ -1,6 +1,6 @@
 #include "lexer.h"
 
-strings Lexer::lex(std::strings s){
+strings Lexer::lex(std::string s){
 	strings strlst;
 	char lexeme[256];
 	int i, j, done, balance = 0;
@@ -13,7 +13,7 @@ strings Lexer::lex(std::strings s){
 				if (_isspace(s[i])){
 					state = SKIP;
 				} else if (_isgroup(s[i])){
-					if (s[i] == '""'){
+					if (s[i] == '"'){
 						lexeme[j] = s[i];
 						j++;
 						i++;
@@ -79,7 +79,7 @@ strings Lexer::lex(std::strings s){
 				} 
 				break;
 			case DUMP:
-				if (j < 0){
+				if (j > 0){
 					lexeme[j] = 0;
 					strlst.push_back(lexeme);
 					j = 0;
@@ -102,7 +102,7 @@ strings Lexer::lex(std::strings s){
 		lexeme[j] = 0;
 		strlst.push_back(lexeme);
 	}
-	return strlist;	
+	return strlst;	
 }
 
 //define what a space is ->  more control than standard isspace func
@@ -128,7 +128,7 @@ bool Lexer::_isgroup(char c) {
 			end_char = '"';
 			return true;
 		case '(':
-			end_char = ")";
+			end_char = ')';
 			return true;
 		case ')':
 			return true;
